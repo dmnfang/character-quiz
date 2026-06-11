@@ -1,0 +1,98 @@
+.screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-base);
+  padding: 24px 32px;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.hero {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.medal { font-size: 56px; }
+
+.score {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.msg {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+
+.grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  min-height: 0;
+}
+
+.card {
+  background: var(--surface-panel);
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 8px;
+  position: relative;
+}
+
+.cardCorrect { border-color: var(--accent-green); background: #EEF8F1; }
+.cardWrong   { border-color: var(--accent-red);   background: #FDF0F0; }
+
+.cardNum {
+  position: absolute;
+  top: 6px; left: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+
+.cardName {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: center;
+}
+
+.cardResult {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+.cardWrong .cardResult { color: var(--accent-red); }
+
+.footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.restartBtn {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  background: var(--accent-warm);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 48px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.restartBtn:hover { transform: scale(1.04); }

@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --surface-base: #FEFAF0;
+  --surface-panel: #F0E8D5;
+  --surface-card: #FAF5E8;
+  --ink: #2E2C28;
+  --ink-muted: #7A7060;
+  --accent-warm: #E8875A;
+  --accent-warm-light: #F5C4A8;
+  --accent-green: #6DBF82;
+  --accent-blue: #6AADE4;
+  --accent-yellow: #F5D76E;
+  --accent-red: #E05C5C;
+  --accent-purple: #A48EE0;
+  --border: #DDD4BE;
+  --radius: 16px;
+  --radius-sm: 8px;
+  --font-display: 'Fredoka', sans-serif;
+  --font-ui: 'Nunito', sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--surface-base);
+  color: var(--ink);
+  font-family: var(--font-ui);
+}
+
+body { overflow: hidden; }
