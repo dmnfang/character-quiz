@@ -99,20 +99,26 @@ export default function QuizScreen({ game, onDone }) {
 
       <div className={styles.main}>
         {/* Left — hidden character */}
-        <div className={styles.leftPanel}>
+        <div className={`${styles.leftPanel} ${phase === 'result' && !correct ? styles.leftPanelWrong : ''} ${phase === 'result' && correct ? styles.leftPanelCorrect : ''}`}>
           {phase === 'result' && correct && <div className={styles.revealBurst}>✨</div>}
-          {phase === 'result' && !correct && <div className={styles.wrongX}>✗</div>}
-          <CharacterAvatar char={char} size="xl" hidden={phase !== 'result'} />
-          {phase === 'result' && (
-            <p className={styles.revealName} style={{ color: char.color }}>{char.name}</p>
-          )}
-          {phase !== 'result' && (
-            <p className={styles.hintText}>
-              {phase === 'flip'
-                ? `Tap ${2 - flipped.length} tile${flipped.length === 1 ? '' : 's'} to reveal`
-                : 'Who is it?'}
-            </p>
-          )}
+          {phase === 'result' && !correct
+            ? <div className={styles.wrongX}>✗</div>
+            : (
+              <>
+                <CharacterAvatar char={char} size="xl" hidden={phase !== 'result'} />
+                {phase === 'result' && (
+                  <p className={styles.revealName} style={{ color: char.color }}>{char.name}</p>
+                )}
+                {phase !== 'result' && (
+                  <p className={styles.hintText}>
+                    {phase === 'flip'
+                      ? `Tap ${2 - flipped.length} tile${flipped.length === 1 ? '' : 's'} to reveal`
+                      : 'Who is it?'}
+                  </p>
+                )}
+              </>
+            )
+          }
         </div>
 
         {/* Right — category tiles + prompt + name buttons */}

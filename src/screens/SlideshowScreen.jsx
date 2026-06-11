@@ -28,7 +28,7 @@ export default function SlideshowScreen({ game, onDone }) {
       <div className={styles.slide} key={char.id}>
         {/* Left */}
         <div className={styles.leftPanel}>
-          <CharacterAvatar char={char} size="xl" />
+          <CharacterAvatar char={char} size="xxl" />
           <p className={styles.greeting}>
             Hello, my name is<br />
             <span className={styles.charName}>{char.name}!</span>
@@ -42,7 +42,6 @@ export default function SlideshowScreen({ game, onDone }) {
             {Object.entries(char.likes).map(([cat, val]) => (
               <div key={cat} className={styles.likeCard} style={{ background: CATEGORY_COLORS[cat] }}>
                 <div className={styles.likeEmoji}>{LIKE_EMOJI[val]}</div>
-                <div className={styles.likeCat}>{CATEGORIES[cat].label}</div>
                 <div className={styles.likeVal}>{val}</div>
               </div>
             ))}

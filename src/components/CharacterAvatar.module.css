@@ -10,6 +10,7 @@
 .md  { width: 80px;  height: 80px;  }
 .lg  { width: 120px; height: 120px; }
 .xl  { width: 180px; height: 180px; }
+.xxl { width: 260px; height: 260px; }
 
 .emoji {
   font-size: 60%;
@@ -20,6 +21,7 @@
 .md  .emoji { font-size: 40px; }
 .lg  .emoji { font-size: 56px; }
 .xl  .emoji { font-size: 80px; }
+.xxl .emoji { font-size: 120px; }
 
 .qmark {
   font-family: var(--font-display);
@@ -30,3 +32,4 @@
 .md  .qmark { font-size: 40px; }
 .lg  .qmark { font-size: 60px; }
 .xl  .qmark { font-size: 90px; }
+.xxl .qmark { font-size: 130px; }
