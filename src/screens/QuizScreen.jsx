@@ -8,15 +8,23 @@ const CATS = ['color', 'sport', 'food', 'animal'];
 
 export default function QuizScreen({ game, onDone }) {
   const { characters, quizOrder } = game;
-  const [qIdx, setQIdx] = useState(0);       // index into quizOrder
-  const [flipped, setFlipped] = useState([]); // cat keys revealed
+  const [qIdx, setQIdx] = useState(0);
+  const [flipped, setFlipped] = useState([]);
   const [phase, setPhase] = useState('flip'); // flip | guess | result
   const [shaking, setShaking] = useState(false);
-  const [guess, setGuess] = useState(null);   // character id or null
+  const [guess, setGuess] = useState(null);
   const [results, setResults] = useState([]);
+  const [nextReady, setNextReady] = useState(false);
+  // Track which unflipped cat is "highlighted" for the scaffolding prompt
+  const [promptCat, setPromptCat] = useState(CATS[0]);
 
   const charIdx = quizOrder[qIdx];
   const char = characters[charIdx];
+
+  // Unflipped cats — the ones students can still ask about
+  const unflipped = CATS.filter(c => !flipped.includes(c));
+  // The active prompt cat: cycle through unflipped ones, or null if all done
+  const activePrompt = unflipped[0] ?? null;
 
   const flipTile = useCallback((cat) => {
     if (phase !== 'flip') return;
@@ -27,7 +35,6 @@ export default function QuizScreen({ game, onDone }) {
     setFlipped(next);
 
     if (next.length === 2) {
-      // Trigger shake then show name buttons
       setShaking(true);
       setTimeout(() => {
         setShaking(false);
@@ -40,6 +47,7 @@ export default function QuizScreen({ game, onDone }) {
     if (phase !== 'guess') return;
     setGuess(guessedChar);
     setPhase('result');
+    setNextReady(false);
     const correct = guessedChar.id === char.id;
     if (correct) {
       confetti({
@@ -51,9 +59,11 @@ export default function QuizScreen({ game, onDone }) {
     }
     const newResults = [...results, { charIdx, correct }];
     setResults(newResults);
+    setTimeout(() => setNextReady(true), 2000);
   }, [phase, char, results, charIdx]);
 
   const nextQuestion = useCallback(() => {
+    if (!nextReady) return;
     const next = qIdx + 1;
     if (next >= 8) {
       onDone(results);
@@ -63,10 +73,16 @@ export default function QuizScreen({ game, onDone }) {
       setPhase('flip');
       setGuess(null);
       setShaking(false);
+      setNextReady(false);
     }
-  }, [qIdx, results, onDone]);
+  }, [qIdx, results, onDone, nextReady]);
 
   const correct = phase === 'result' && guess && guess.id === char.id;
+
+  // Scaffolding: which category label to show in the prompt
+  const promptLabel = phase === 'flip' && unflipped.length > 0
+    ? CATEGORIES[unflipped[0]].label
+    : null;
 
   return (
     <div className={styles.screen}>
@@ -87,17 +103,11 @@ export default function QuizScreen({ game, onDone }) {
       <div className={styles.main}>
         {/* Left — hidden character */}
         <div className={styles.leftPanel}>
-          {phase === 'result' && correct && (
-            <div className={styles.revealBurst}>✨</div>
-          )}
-          {phase === 'result' && !correct && (
-            <div className={styles.wrongX}>✗</div>
-          )}
+          {phase === 'result' && correct && <div className={styles.revealBurst}>✨</div>}
+          {phase === 'result' && !correct && <div className={styles.wrongX}>✗</div>}
           <CharacterAvatar char={char} size="xl" hidden={phase !== 'result'} />
           {phase === 'result' && (
-            <p className={styles.revealName} style={{ color: char.color }}>
-              {char.name}
-            </p>
+            <p className={styles.revealName} style={{ color: char.color }}>{char.name}</p>
           )}
           {phase !== 'result' && (
             <p className={styles.hintText}>
@@ -108,8 +118,19 @@ export default function QuizScreen({ game, onDone }) {
           )}
         </div>
 
-        {/* Right — category tiles */}
+        {/* Right — category tiles + prompt + name buttons */}
         <div className={styles.rightPanel}>
+
+          {/* Scaffolding prompt */}
+          <div className={`${styles.scaffold} ${phase === 'flip' && flipped.length < 2 ? styles.scaffoldVisible : styles.scaffoldHidden}`}>
+            <span className={styles.scaffoldText}>What</span>
+            <span className={styles.scaffoldPill}>
+              {promptLabel ? `${CATEGORIES[unflipped[0]].icon} ${promptLabel}` : '…'}
+            </span>
+            <span className={styles.scaffoldText}>do you like?</span>
+          </div>
+
+          {/* Tile grid */}
           <div className={styles.tileGrid}>
             {CATS.map(cat => {
               const isFlipped = flipped.includes(cat);
@@ -121,12 +142,10 @@ export default function QuizScreen({ game, onDone }) {
                   onClick={() => flipTile(cat)}
                 >
                   <div className={`${styles.tile} ${isFlipped ? styles.tileFlipped : ''}`}>
-                    {/* Front (face down) */}
                     <div className={styles.tileFront}>
                       <span className={styles.tileCatIcon}>{CATEGORIES[cat].icon}</span>
                       <span className={styles.tileCatLabel}>{CATEGORIES[cat].label}</span>
                     </div>
-                    {/* Back (revealed) */}
                     <div className={styles.tileBack} style={{ background: CATEGORY_COLORS[cat] }}>
                       <span className={styles.tileRevealEmoji}>{LIKE_EMOJI[val]}</span>
                       <span className={styles.tileRevealVal}>{val}</span>
@@ -137,17 +156,18 @@ export default function QuizScreen({ game, onDone }) {
             })}
           </div>
 
-          {/* Name buttons — slide up when phase=guess or result */}
+          {/* Name buttons — slide up after 2 flips */}
           <div className={`${styles.nameButtonsArea} ${phase !== 'flip' ? styles.nameButtonsVisible : ''}`}>
             <p className={styles.guessLabel}>Who is it?</p>
             <div className={styles.nameButtons}>
               {characters.map(c => (
                 <button
                   key={c.id}
-                  className={`${styles.nameBtn}
-                    ${phase === 'result' && c.id === char.id ? styles.nameBtnCorrect : ''}
-                    ${phase === 'result' && guess && c.id === guess.id && c.id !== char.id ? styles.nameBtnWrong : ''}
-                  `}
+                  className={[
+                    styles.nameBtn,
+                    phase === 'result' && c.id === char.id ? styles.nameBtnCorrect : '',
+                    phase === 'result' && guess && c.id === guess.id && c.id !== char.id ? styles.nameBtnWrong : '',
+                  ].join(' ')}
                   onClick={() => makeGuess(c)}
                   disabled={phase === 'result'}
                   style={{ '--char-color': c.color }}
@@ -164,7 +184,11 @@ export default function QuizScreen({ game, onDone }) {
       {/* Next button */}
       {phase === 'result' && (
         <div className={styles.footer}>
-          <button className={styles.nextBtn} onClick={nextQuestion}>
+          <button
+            className={`${styles.nextBtn} ${!nextReady ? styles.nextBtnWaiting : ''}`}
+            onClick={nextQuestion}
+            disabled={!nextReady}
+          >
             {qIdx < 7 ? 'Next Question →' : 'See Results 🏆'}
           </button>
         </div>
