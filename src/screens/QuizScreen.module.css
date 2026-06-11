@@ -155,7 +155,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  flex-shrink: 0;
+  flex: 0 0 42%;
 }
 
 .tileWrapper {
@@ -177,7 +177,7 @@
 
 .tile {
   position: relative;
-  height: 100px;
+  height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 12px;
@@ -194,7 +194,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .tileFront {
@@ -202,21 +202,21 @@
   border: 2px solid var(--border);
 }
 
-.tileCatIcon { font-size: 28px; }
+.tileCatIcon { font-size: 32px; }
 .tileCatLabel {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--ink-muted);
 }
 
 .tileBack { transform: rotateY(180deg); }
 
-.tileRevealEmoji { font-size: 32px; }
+.tileRevealEmoji { font-size: 36px; }
 .tileRevealVal {
   font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
   color: #fff;
   text-transform: capitalize;
 }
@@ -251,29 +251,28 @@
 .nameButtons {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px;
+  gap: 8px;
   flex: 1;
   min-height: 0;
-  align-content: start;
 }
 
 .nameBtn {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   background: var(--surface-card);
   border: 2px solid var(--border);
-  border-radius: 8px;
-  padding: 8px 10px;
+  border-radius: 12px;
+  padding: 0 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   transition: background 0.15s, border-color 0.15s;
   text-align: left;
-  height: 40px;
   overflow: hidden;
   white-space: nowrap;
+  width: 100%;
 }
 
 .nameBtn:hover:not(:disabled) {
@@ -281,7 +280,7 @@
   border-color: var(--char-color, var(--accent-warm));
 }
 
-.nameBtnEmoji { font-size: 18px; flex-shrink: 0; }
+.nameBtnEmoji { font-size: 22px; flex-shrink: 0; }
 
 .nameBtnCorrect {
   background: var(--accent-green) !important;
