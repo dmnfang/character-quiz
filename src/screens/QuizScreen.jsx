@@ -79,10 +79,7 @@ export default function QuizScreen({ game, onDone }) {
 
   const correct = phase === 'result' && guess && guess.id === char.id;
 
-  // Scaffolding: which category label to show in the prompt
-  const promptLabel = phase === 'flip' && unflipped.length > 0
-    ? CATEGORIES[unflipped[0]].label
-    : null;
+
 
   return (
     <div className={styles.screen}>
@@ -124,9 +121,7 @@ export default function QuizScreen({ game, onDone }) {
           {/* Scaffolding prompt */}
           <div className={`${styles.scaffold} ${phase === 'flip' && flipped.length < 2 ? styles.scaffoldVisible : styles.scaffoldHidden}`}>
             <span className={styles.scaffoldText}>What</span>
-            <span className={styles.scaffoldPill}>
-              {promptLabel ? `${CATEGORIES[unflipped[0]].icon} ${promptLabel}` : '…'}
-            </span>
+            <span className={styles.scaffoldBlank}></span>
             <span className={styles.scaffoldText}>do you like?</span>
           </div>
 
