@@ -292,6 +292,17 @@
   overflow: hidden;
   min-height: 0;
   min-width: 0;
+  width: 100%;
+}
+
+.nameBtnImgWrap {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nameBtnLabel {
@@ -299,6 +310,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  flex-shrink: 0;
 }
 
 .nameBtn:hover:not(:disabled) {

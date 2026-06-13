@@ -16,14 +16,14 @@ export default function CharacterAvatar({ char, size = 'md', hidden = false }) {
 
   if (imgError) {
     return (
-      <div className={`${styles.avatar} ${sizeClass}`} style={{ background: char.color }}>
+      <div className={`${styles.avatar} ${sizeClass}`} style={{ background: '#fff' }}>
         <span className={styles.emoji}>{char.emoji}</span>
       </div>
     );
   }
 
   return (
-    <div className={`${styles.avatar} ${sizeClass}`} style={{ background: char.color }}>
+    <div className={`${styles.avatar} ${sizeClass}`} style={{ background: '#fff' }}>
       <img
         src={animalImagePath(char.id)}
         alt={char.name}

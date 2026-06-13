@@ -171,7 +171,9 @@ export default function QuizScreen({ game, onDone }) {
                   disabled={phase === 'result'}
                   style={{ '--char-color': c.color }}
                 >
-                  <AnimalIcon char={c} size="lg" />
+                  <div className={styles.nameBtnImgWrap}>
+                    <AnimalIcon char={c} size="fill" />
+                  </div>
                   <span className={styles.nameBtnLabel}>{c.name}</span>
                 </button>
               ))}
