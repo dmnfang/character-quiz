@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import confetti from 'canvas-confetti';
-import { CATEGORIES, CATEGORY_COLORS } from '../data.js';
+import { CATEGORIES, CATEGORY_COLORS, displayLike } from '../data.js';
 import CharacterAvatar from '../components/CharacterAvatar.jsx';
 import AnimalIcon from '../components/AnimalIcon.jsx';
 import LikeImage from '../components/LikeImage.jsx';
@@ -14,7 +14,6 @@ export default function QuizScreen({ game, onDone }) {
   const [qIdx, setQIdx] = useState(0);
   const [flipped, setFlipped] = useState([]);
   const [phase, setPhase] = useState('flip'); // flip | guess | result
-  const [shaking, setShaking] = useState(false);
   const [guess, setGuess] = useState(null);
   const [results, setResults] = useState([]);
   const [nextReady, setNextReady] = useState(false);
@@ -31,11 +30,9 @@ export default function QuizScreen({ game, onDone }) {
     setFlipped(next);
 
     if (next.length === 2) {
-      setShaking(true);
       setTimeout(() => {
-        setShaking(false);
         setPhase('guess');
-      }, 800);
+      }, 600);
     }
   }, [phase, flipped]);
 
@@ -68,7 +65,6 @@ export default function QuizScreen({ game, onDone }) {
       setFlipped([]);
       setPhase('flip');
       setGuess(null);
-      setShaking(false);
       setNextReady(false);
     }
   }, [qIdx, results, onDone, nextReady]);
@@ -128,7 +124,7 @@ export default function QuizScreen({ game, onDone }) {
               return (
                 <div
                   key={cat}
-                  className={`${styles.tileWrapper} ${isFlipped && shaking ? styles.shake : ''}`}
+                  className={styles.tileWrapper}
                   onClick={() => flipTile(cat)}
                 >
                   <div className={`${styles.tile} ${isFlipped ? styles.tileFlipped : ''}`}>
@@ -142,7 +138,7 @@ export default function QuizScreen({ game, onDone }) {
                       <div className={styles.tileImgWrap}>
                         <LikeImage category={cat} value={val} size="fill" />
                       </div>
-                      <span className={styles.tileRevealVal} style={{ color: CATEGORY_COLORS[cat] }}>{val}</span>
+                      <span className={styles.tileRevealVal} style={{ color: CATEGORY_COLORS[cat] }}>{displayLike(val)}</span>
                     </div>
                   </div>
                 </div>

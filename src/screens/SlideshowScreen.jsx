@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CATEGORY_COLORS } from '../data.js';
+import { CATEGORY_COLORS, displayLike } from '../data.js';
 import CharacterAvatar from '../components/CharacterAvatar.jsx';
 import LikeImage from '../components/LikeImage.jsx';
 import Arrow from '../components/Arrow.jsx';
@@ -51,7 +51,7 @@ export default function SlideshowScreen({ game, onDone }) {
                 <div className={styles.likeImgWrap}>
                   <LikeImage category={cat} value={val} size="fill" />
                 </div>
-                <div className={styles.likeVal} style={{ color: CATEGORY_COLORS[cat] }}>{val}</div>
+                <div className={styles.likeVal} style={{ color: CATEGORY_COLORS[cat] }}>{displayLike(val)}</div>
               </div>
             ))}
           </div>

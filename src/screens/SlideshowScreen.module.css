@@ -126,7 +126,6 @@
   font-family: var(--font-display);
   font-size: 38px;
   font-weight: 700;
-  text-transform: lowercase;
   flex-shrink: 0;
 }
 
