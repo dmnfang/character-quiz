@@ -144,7 +144,9 @@ export default function QuizScreen({ game, onDone }) {
                       <span className={styles.tileCatLabel}>{CATEGORIES[cat].label}</span>
                     </div>
                     <div className={styles.tileBack} style={{ borderColor: CATEGORY_COLORS[cat] }}>
-                      <LikeImage category={cat} value={val} size="lg" />
+                      <div className={styles.tileImgWrap}>
+                        <LikeImage category={cat} value={val} size="fill" />
+                      </div>
                       <span className={styles.tileRevealVal} style={{ color: CATEGORY_COLORS[cat] }}>{val}</span>
                     </div>
                   </div>
@@ -169,8 +171,8 @@ export default function QuizScreen({ game, onDone }) {
                   disabled={phase === 'result'}
                   style={{ '--char-color': c.color }}
                 >
-                  <AnimalIcon char={c} size="sm" />
-                  {c.name}
+                  <AnimalIcon char={c} size="lg" />
+                  <span className={styles.nameBtnLabel}>{c.name}</span>
                 </button>
               ))}
             </div>

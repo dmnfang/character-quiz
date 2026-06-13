@@ -11,7 +11,7 @@
 .lg   { width: 120px; height: 120px; }
 .xl   { width: 180px; height: 180px; }
 .xxl  { width: 260px; height: 260px; }
-.xxxl { width: 420px; height: 420px; }
+.xxxl { width: 480px; height: 480px; }
 
 .emoji {
   font-size: 60%;
@@ -38,7 +38,7 @@
 .xxxl .qmark { font-size: 220px; }
 
 .img {
-  width: 80%;
-  height: 80%;
+  width: 88%;
+  height: 88%;
   object-fit: contain;
 }

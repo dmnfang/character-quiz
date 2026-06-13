@@ -48,7 +48,9 @@ export default function SlideshowScreen({ game, onDone }) {
           <div className={styles.likeGrid}>
             {Object.entries(char.likes).map(([cat, val]) => (
               <div key={cat} className={styles.likeCard} style={{ borderColor: CATEGORY_COLORS[cat] }}>
-                <LikeImage category={cat} value={val} size="xl" />
+                <div className={styles.likeImgWrap}>
+                  <LikeImage category={cat} value={val} size="fill" />
+                </div>
                 <div className={styles.likeVal} style={{ color: CATEGORY_COLORS[cat] }}>{val}</div>
               </div>
             ))}
