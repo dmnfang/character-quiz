@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CATEGORY_COLORS } from '../data.js';
 import CharacterAvatar from '../components/CharacterAvatar.jsx';
 import LikeImage from '../components/LikeImage.jsx';
+import Arrow from '../components/Arrow.jsx';
 import styles from './SlideshowScreen.module.css';
 
 const VOWEL_START = ['a','e','i','o','u'];
@@ -34,7 +35,7 @@ export default function SlideshowScreen({ game, onDone }) {
       <div className={styles.slide} key={char.id}>
         {/* Left */}
         <div className={styles.leftPanel}>
-          <CharacterAvatar char={char} size="xxl" />
+          <CharacterAvatar char={char} size="xxxl" />
           <p className={styles.greeting}>
             Hello, I'm {article(char.name)}<br />
             <span className={styles.charName}>{char.name}!</span>
@@ -46,9 +47,9 @@ export default function SlideshowScreen({ game, onDone }) {
           <p className={styles.ilike}>I like...</p>
           <div className={styles.likeGrid}>
             {Object.entries(char.likes).map(([cat, val]) => (
-              <div key={cat} className={styles.likeCard} style={{ background: CATEGORY_COLORS[cat] }}>
-                <LikeImage category={cat} value={val} size="lg" />
-                <div className={styles.likeVal}>{val}</div>
+              <div key={cat} className={styles.likeCard} style={{ borderColor: CATEGORY_COLORS[cat] }}>
+                <LikeImage category={cat} value={val} size="xl" />
+                <div className={styles.likeVal} style={{ color: CATEGORY_COLORS[cat] }}>{val}</div>
               </div>
             ))}
           </div>
@@ -56,9 +57,11 @@ export default function SlideshowScreen({ game, onDone }) {
       </div>
 
       <div className={styles.nav}>
-        <button className={styles.navBtn} onClick={prev} disabled={idx === 0}>← Back</button>
+        <button className={styles.navBtn} onClick={prev} disabled={idx === 0}>
+          <Arrow direction="left" size={22} /> Back
+        </button>
         <button className={`${styles.navBtn} ${styles.navNext}`} onClick={next}>
-          {idx === total - 1 ? 'Start Quiz! 🎯' : 'Next →'}
+          {idx === total - 1 ? <>Start Quiz! 🎯</> : <>Next <Arrow direction="right" size={22} /></>}
         </button>
       </div>
     </div>

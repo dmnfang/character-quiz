@@ -6,11 +6,12 @@
   flex-shrink: 0;
 }
 
-.sm  { width: 56px;  height: 56px;  }
-.md  { width: 80px;  height: 80px;  }
-.lg  { width: 120px; height: 120px; }
-.xl  { width: 180px; height: 180px; }
-.xxl { width: 260px; height: 260px; }
+.sm   { width: 56px;  height: 56px;  }
+.md   { width: 80px;  height: 80px;  }
+.lg   { width: 120px; height: 120px; }
+.xl   { width: 180px; height: 180px; }
+.xxl  { width: 260px; height: 260px; }
+.xxxl { width: 420px; height: 420px; }
 
 .emoji {
   font-size: 60%;
@@ -22,6 +23,7 @@
 .lg  .emoji { font-size: 56px; }
 .xl  .emoji { font-size: 80px; }
 .xxl .emoji { font-size: 120px; }
+.xxxl .emoji { font-size: 200px; }
 
 .qmark {
   font-family: var(--font-display);
@@ -33,6 +35,7 @@
 .lg  .qmark { font-size: 60px; }
 .xl  .qmark { font-size: 90px; }
 .xxl .qmark { font-size: 130px; }
+.xxxl .qmark { font-size: 220px; }
 
 .img {
   width: 80%;

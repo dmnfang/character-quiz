@@ -4,6 +4,7 @@ import { CATEGORIES, CATEGORY_COLORS } from '../data.js';
 import CharacterAvatar from '../components/CharacterAvatar.jsx';
 import AnimalIcon from '../components/AnimalIcon.jsx';
 import LikeImage from '../components/LikeImage.jsx';
+import Arrow from '../components/Arrow.jsx';
 import styles from './QuizScreen.module.css';
 
 const CATS = ['color', 'sport', 'food', 'subject'];
@@ -142,9 +143,9 @@ export default function QuizScreen({ game, onDone }) {
                       <span className={styles.tileCatIcon}>{CATEGORIES[cat].icon}</span>
                       <span className={styles.tileCatLabel}>{CATEGORIES[cat].label}</span>
                     </div>
-                    <div className={styles.tileBack} style={{ background: CATEGORY_COLORS[cat] }}>
+                    <div className={styles.tileBack} style={{ borderColor: CATEGORY_COLORS[cat] }}>
                       <LikeImage category={cat} value={val} size="lg" />
-                      <span className={styles.tileRevealVal}>{val}</span>
+                      <span className={styles.tileRevealVal} style={{ color: CATEGORY_COLORS[cat] }}>{val}</span>
                     </div>
                   </div>
                 </div>
@@ -185,7 +186,7 @@ export default function QuizScreen({ game, onDone }) {
             onClick={nextQuestion}
             disabled={!nextReady}
           >
-            {qIdx < 7 ? 'Next Question →' : 'See Results 🏆'}
+            {qIdx < 7 ? <>Next Question <Arrow direction="right" size={24} /></> : <>See Results 🏆</>}
           </button>
         </div>
       )}

@@ -68,9 +68,9 @@ export function assignLikes(characters) {
   });
   
   if (!valid) {
-    // Force at least one pair to share 2 categories by copying two assignments
-    assignments[1].color  = assignments[0].color;
-    assignments[1].animal = assignments[0].animal;
+    // Force a pair to share 2 categories by copying two of char 0's likes onto char 1
+    assignments[1][cats[0]] = assignments[0][cats[0]];
+    assignments[1][cats[1]] = assignments[0][cats[1]];
   }
   
   return characters.map((char, i) => ({

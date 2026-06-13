@@ -13,7 +13,9 @@
 .sm { width: 36px;  height: 36px;  }
 .md { width: 52px;  height: 52px;  }
 .lg { width: 72px;  height: 72px;  }
+.xl { width: 110px; height: 110px; }
 
 .sm.fallback { font-size: 32px; }
 .md.fallback { font-size: 48px; }
 .lg.fallback { font-size: 64px; }
+.xl.fallback { font-size: 96px; }
