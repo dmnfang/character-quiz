@@ -101,7 +101,7 @@ export default function QuizScreen({ game, onDone }) {
             ? <div className={styles.wrongX}>✗</div>
             : (
               <>
-                <CharacterAvatar char={char} size="xl" hidden={phase !== 'result'} />
+                <CharacterAvatar char={char} size="xxxl" hidden={phase !== 'result'} />
                 {phase === 'result' && (
                   <p className={styles.revealName} style={{ color: char.color }}>{char.name}</p>
                 )}
@@ -120,13 +120,6 @@ export default function QuizScreen({ game, onDone }) {
         {/* Right — category tiles + prompt + name buttons */}
         <div className={styles.rightPanel}>
 
-          {/* Scaffolding prompt */}
-          <div className={`${styles.scaffold} ${phase === 'flip' && flipped.length < 2 ? styles.scaffoldVisible : styles.scaffoldHidden}`}>
-            <span className={styles.scaffoldText}>What</span>
-            <span className={styles.scaffoldBlank}></span>
-            <span className={styles.scaffoldText}>do you like?</span>
-          </div>
-
           {/* Tile grid */}
           <div className={styles.tileGrid}>
             {CATS.map(cat => {
@@ -141,7 +134,9 @@ export default function QuizScreen({ game, onDone }) {
                   <div className={`${styles.tile} ${isFlipped ? styles.tileFlipped : ''}`}>
                     <div className={styles.tileFront}>
                       <span className={styles.tileCatIcon}>{CATEGORIES[cat].icon}</span>
-                      <span className={styles.tileCatLabel}>{CATEGORIES[cat].label}</span>
+                      <p className={styles.tilePrompt}>
+                        What <span className={styles.tilePromptCat}>{CATEGORIES[cat].label.toLowerCase()}</span> do you like?
+                      </p>
                     </div>
                     <div className={styles.tileBack} style={{ borderColor: CATEGORY_COLORS[cat] }}>
                       <div className={styles.tileImgWrap}>
@@ -157,7 +152,6 @@ export default function QuizScreen({ game, onDone }) {
 
           {/* Name buttons — slide up after 2 flips */}
           <div className={`${styles.nameButtonsArea} ${phase !== 'flip' ? styles.nameButtonsVisible : ''}`}>
-            <p className={styles.guessLabel}>Who is it?</p>
             <div className={styles.nameButtons}>
               {characters.map(c => (
                 <button

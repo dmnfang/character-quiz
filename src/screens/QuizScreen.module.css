@@ -64,7 +64,7 @@
 }
 
 .hintText {
-  font-size: 18px;
+  font-size: 32px;
   font-weight: 600;
   color: var(--ink-muted);
   text-align: center;
@@ -125,39 +125,12 @@
   min-height: 0;
 }
 
-/* SCAFFOLDING PROMPT */
-.scaffold {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-shrink: 0;
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.scaffoldVisible { opacity: 1; transform: translateY(0); }
-.scaffoldHidden  { opacity: 0; transform: translateY(-8px); pointer-events: none; }
-
-.scaffoldText {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--ink);
-}
-
-.scaffoldBlank {
-  display: inline-block;
-  width: 120px;
-  border-bottom: 3px solid var(--ink);
-  margin: 0 4px;
-}
-
 /* TILE GRID */
 .tileGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  flex: 0 0 42%;
+  gap: 12px;
+  flex: 0 0 48%;
 }
 
 .tileWrapper {
@@ -202,14 +175,24 @@
 .tileFront {
   background: var(--surface-card);
   border: 2px solid var(--border);
+  padding: 16px;
+  gap: 12px;
 }
 
-.tileCatIcon { font-size: 32px; }
-.tileCatLabel {
+.tileCatIcon { font-size: 40px; }
+
+.tilePrompt {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
   color: var(--ink-muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.tilePromptCat {
+  color: var(--ink);
+  text-transform: lowercase;
 }
 
 .tileBack {
@@ -253,15 +236,6 @@
 .nameButtonsVisible {
   transform: translateY(0);
   opacity: 1;
-}
-
-.guessLabel {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--ink-muted);
-  text-align: center;
-  flex-shrink: 0;
 }
 
 .nameButtons {
