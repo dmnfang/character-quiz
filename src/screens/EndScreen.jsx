@@ -1,6 +1,6 @@
 import confetti from 'canvas-confetti';
 import { useEffect } from 'react';
-import CharacterAvatar from '../components/CharacterAvatar.jsx';
+import AnimalIcon from '../components/AnimalIcon.jsx';
 import styles from './EndScreen.module.css';
 
 export default function EndScreen({ game, results, onRestart }) {
@@ -35,9 +35,11 @@ export default function EndScreen({ game, results, onRestart }) {
           return (
             <div key={char.id} className={`${styles.card} ${correct ? styles.cardCorrect : styles.cardWrong}`}>
               <div className={styles.cardNum}>Q{qi + 1}</div>
-              <CharacterAvatar char={char} size="md" />
-              <div className={styles.cardName}>{char.name}</div>
               <div className={styles.cardResult}>{correct ? '✓' : '✗'}</div>
+              <div className={styles.cardImgWrap}>
+                <AnimalIcon char={char} size="fill" />
+              </div>
+              <div className={styles.cardName}>{char.name}</div>
             </div>
           );
         })}
