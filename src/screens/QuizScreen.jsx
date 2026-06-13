@@ -1,10 +1,12 @@
 import { useState, useCallback } from 'react';
 import confetti from 'canvas-confetti';
-import { LIKE_EMOJI, CATEGORIES, CATEGORY_COLORS } from '../data.js';
+import { CATEGORIES, CATEGORY_COLORS } from '../data.js';
 import CharacterAvatar from '../components/CharacterAvatar.jsx';
+import AnimalIcon from '../components/AnimalIcon.jsx';
+import LikeImage from '../components/LikeImage.jsx';
 import styles from './QuizScreen.module.css';
 
-const CATS = ['color', 'sport', 'food', 'animal'];
+const CATS = ['color', 'sport', 'food', 'subject'];
 
 export default function QuizScreen({ game, onDone }) {
   const { characters, quizOrder } = game;
@@ -15,16 +17,9 @@ export default function QuizScreen({ game, onDone }) {
   const [guess, setGuess] = useState(null);
   const [results, setResults] = useState([]);
   const [nextReady, setNextReady] = useState(false);
-  // Track which unflipped cat is "highlighted" for the scaffolding prompt
-  const [promptCat, setPromptCat] = useState(CATS[0]);
 
   const charIdx = quizOrder[qIdx];
   const char = characters[charIdx];
-
-  // Unflipped cats — the ones students can still ask about
-  const unflipped = CATS.filter(c => !flipped.includes(c));
-  // The active prompt cat: cycle through unflipped ones, or null if all done
-  const activePrompt = unflipped[0] ?? null;
 
   const flipTile = useCallback((cat) => {
     if (phase !== 'flip') return;
@@ -148,7 +143,7 @@ export default function QuizScreen({ game, onDone }) {
                       <span className={styles.tileCatLabel}>{CATEGORIES[cat].label}</span>
                     </div>
                     <div className={styles.tileBack} style={{ background: CATEGORY_COLORS[cat] }}>
-                      <span className={styles.tileRevealEmoji}>{LIKE_EMOJI[val]}</span>
+                      <LikeImage category={cat} value={val} size="lg" />
                       <span className={styles.tileRevealVal}>{val}</span>
                     </div>
                   </div>
@@ -173,7 +168,7 @@ export default function QuizScreen({ game, onDone }) {
                   disabled={phase === 'result'}
                   style={{ '--char-color': c.color }}
                 >
-                  <span className={styles.nameBtnEmoji}>{c.emoji}</span>
+                  <AnimalIcon char={c} size="sm" />
                   {c.name}
                 </button>
               ))}

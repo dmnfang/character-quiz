@@ -1,0 +1,18 @@
+.img, .fallback {
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.sm { width: 24px; height: 24px; }
+.md { width: 36px; height: 36px; }
+
+.sm.fallback { font-size: 22px; }
+.md.fallback { font-size: 32px; }

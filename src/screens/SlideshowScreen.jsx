@@ -1,7 +1,13 @@
 import { useState } from 'react';
-import { LIKE_EMOJI, CATEGORIES, CATEGORY_COLORS } from '../data.js';
+import { CATEGORY_COLORS } from '../data.js';
 import CharacterAvatar from '../components/CharacterAvatar.jsx';
+import LikeImage from '../components/LikeImage.jsx';
 import styles from './SlideshowScreen.module.css';
+
+const VOWEL_START = ['a','e','i','o','u'];
+function article(name) {
+  return VOWEL_START.includes(name[0].toLowerCase()) ? 'an' : 'a';
+}
 
 export default function SlideshowScreen({ game, onDone }) {
   const [idx, setIdx] = useState(0);
@@ -30,7 +36,7 @@ export default function SlideshowScreen({ game, onDone }) {
         <div className={styles.leftPanel}>
           <CharacterAvatar char={char} size="xxl" />
           <p className={styles.greeting}>
-            Hello, my name is<br />
+            Hello, I'm {article(char.name)}<br />
             <span className={styles.charName}>{char.name}!</span>
           </p>
         </div>
@@ -41,7 +47,7 @@ export default function SlideshowScreen({ game, onDone }) {
           <div className={styles.likeGrid}>
             {Object.entries(char.likes).map(([cat, val]) => (
               <div key={cat} className={styles.likeCard} style={{ background: CATEGORY_COLORS[cat] }}>
-                <div className={styles.likeEmoji}>{LIKE_EMOJI[val]}</div>
+                <LikeImage category={cat} value={val} size="lg" />
                 <div className={styles.likeVal}>{val}</div>
               </div>
             ))}

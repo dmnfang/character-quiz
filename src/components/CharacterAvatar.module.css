@@ -33,3 +33,9 @@
 .lg  .qmark { font-size: 60px; }
 .xl  .qmark { font-size: 90px; }
 .xxl .qmark { font-size: 130px; }
+
+.img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
