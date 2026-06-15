@@ -131,7 +131,6 @@ export default function QuizScreen({ game, onDone }) {
                 >
                   <div className={`${styles.tile} ${isFlipped ? styles.tileFlipped : ''}`}>
                     <div className={styles.tileFront}>
-                      <span className={styles.tileCatIcon}>{CATEGORIES[cat].icon}</span>
                       <p className={styles.tilePrompt}>
                         What <span className={styles.tilePromptCat}>{CATEGORIES[cat].label.toLowerCase()}</span> do you like?
                       </p>
