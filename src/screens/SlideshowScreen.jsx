@@ -35,7 +35,9 @@ export default function SlideshowScreen({ game, onDone }) {
       <div className={styles.slide} key={char.id}>
         {/* Left */}
         <div className={styles.leftPanel}>
-          <CharacterAvatar char={char} size="xxxl" />
+          <div className={styles.avatarWrap}>
+            <CharacterAvatar char={char} />
+          </div>
           <p className={styles.greeting}>
             Hello, I'm {article(char.name)}<br />
             <span className={styles.charName}>{char.name}!</span>

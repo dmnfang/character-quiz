@@ -97,7 +97,9 @@ export default function QuizScreen({ game, onDone }) {
             ? <div className={styles.wrongX}>✗</div>
             : (
               <>
-                <CharacterAvatar char={char} size="xxxl" hidden={phase !== 'result'} />
+                <div className={styles.avatarWrap}>
+                  <CharacterAvatar char={char} hidden={phase !== 'result'} />
+                </div>
                 {phase === 'result' && (
                   <p className={styles.revealName} style={{ color: char.color }}>{char.name}</p>
                 )}
