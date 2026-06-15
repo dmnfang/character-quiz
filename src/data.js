@@ -53,10 +53,11 @@ export const CATEGORY_COLORS = {
   subject: '#E8875A',
 };
 
-// Display casing for like values — lowercase except special cases like "P.E."
-const KEEP_CASE = new Set(['P.E.']);
+// Display casing for like values — lowercase except special cases
+// (language names and abbreviations that should keep proper casing)
+const PROPER_CASE = { 'P.E.': 'P.E.', english: 'English', japanese: 'Japanese' };
 export function displayLike(value) {
-  return KEEP_CASE.has(value) ? value : value.toLowerCase();
+  return PROPER_CASE[value] ?? value.toLowerCase();
 }
 
 // Convert a like value into a URL-safe slug for image filenames
