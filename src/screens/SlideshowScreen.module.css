@@ -147,13 +147,16 @@
   display: flex;
   justify-content: space-between;
   gap: 16px;
+  height: 64px;
+  flex-shrink: 0;
 }
 
 .navBtn {
   font-family: var(--font-display);
   font-size: 20px;
   font-weight: 600;
-  padding: 12px 36px;
+  padding: 0 36px;
+  height: 100%;
   border-radius: 50px;
   border: 2px solid var(--border);
   background: var(--surface-panel);
@@ -163,6 +166,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  line-height: 1;
 }
 .navBtn:disabled { opacity: 0.35; cursor: default; }
 .navBtn:not(:disabled):hover { transform: scale(1.03); }
