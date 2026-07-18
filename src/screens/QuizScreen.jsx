@@ -46,7 +46,7 @@ export default function QuizScreen({ game, onDone }) {
     // Grey out the correct answer after each question
     setGreyedOut(prev => new Set([...prev, char.id]));
     setTimeout(() => setNextReady(true), 2000);
-  }, [phase, char, results, charIdx, difficulty]);
+  }, [phase, char, results, charIdx]);
 
   const nextQuestion = useCallback(() => {
     if (!nextReady) return;
