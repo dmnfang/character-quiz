@@ -1,179 +1,60 @@
-.screen {
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  background: var(--surface-base);
-  padding: 20px 32px;
-  gap: 12px;
-  overflow: hidden;
-}
+.screen { height: 100dvh; display: flex; flex-direction: column; background: var(--surface-base); padding: 20px 32px; gap: 12px; overflow: hidden; }
 
-.header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.progress {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--ink-muted);
-  min-width: 48px;
-}
-
+.header { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.progress { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--ink-muted); min-width: 48px; }
 .dots { display: flex; gap: 8px; }
-
-.dot {
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--border);
-  transition: background 0.3s;
-}
+.dot { width: 12px; height: 12px; border-radius: 50%; background: var(--border); transition: background 0.3s; }
 .dotActive { background: var(--accent-warm); }
-.dotDone   { background: var(--accent-warm-light); }
+.dotDone { background: var(--accent-warm-light); }
 
-.slide {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  min-height: 0;
-}
+.slide { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; min-height: 0; }
 
 .leftPanel {
-  background: var(--surface-panel);
-  border-radius: var(--radius);
-  border: 2px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(16px, 4vh, 48px);
-  padding: clamp(12px, 3vh, 32px);
-  min-height: 0;
-  min-width: 0;
-  overflow: hidden;
+  background: var(--surface-panel); border-radius: var(--radius); border: 2px solid var(--border);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(16px, 4vh, 48px); padding: clamp(12px, 3vh, 32px);
+  min-height: 0; min-width: 0; overflow: hidden;
 }
 
-.avatarWrap {
-  flex: 1;
-  aspect-ratio: 1;
-  min-height: 0;
-  min-width: 0;
-  max-width: 100%;
-  max-height: 100%;
-}
+.avatarWrap { flex: 1; aspect-ratio: 1; min-height: 0; min-width: 0; max-width: 100%; max-height: 100%; }
 
-.greeting {
-  text-align: center;
-  font-size: clamp(18px, 4vh, 38px);
-  font-weight: 600;
-  color: var(--ink-muted);
-  line-height: 1.4;
-}
-
-.charName {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(32px, 8vh, 76px);
-  font-weight: 700;
-  color: var(--ink);
-  text-transform: lowercase;
-}
+.greeting { text-align: center; font-size: clamp(18px, 4vh, 38px); font-weight: 600; color: var(--ink-muted); line-height: 1.4; flex-shrink: 0; }
+.charName { display: block; font-family: var(--font-display); font-size: clamp(32px, 8vh, 76px); font-weight: 700; color: var(--ink); text-transform: lowercase; }
 
 .rightPanel {
-  background: var(--surface-panel);
-  border-radius: var(--radius);
-  border: 2px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(12px, 3vh, 28px);
-  padding: clamp(16px, 4vh, 40px);
-  min-height: 0;
-  overflow: hidden;
+  background: var(--surface-panel); border-radius: var(--radius); border: 2px solid var(--border);
+  display: flex; flex-direction: column; align-items: center;
+  gap: clamp(12px, 3vh, 28px); padding: clamp(16px, 4vh, 40px);
+  min-height: 0; overflow: hidden;
 }
 
-.ilike {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 7vh, 64px);
-  font-weight: 700;
-  color: var(--ink);
-  flex-shrink: 0;
-}
+.ilike { font-family: var(--font-display); font-size: clamp(28px, 7vh, 64px); font-weight: 700; color: var(--ink); flex-shrink: 0; }
 
-.likeGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(8px, 2vh, 24px);
-  width: 100%;
-  flex: 1;
-  min-height: 0;
-}
+.likeGrid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(8px, 2vh, 24px); width: 100%; flex: 1; min-height: 0; }
 
 .likeCard {
-  border-radius: var(--radius);
-  background: #fff;
-  border: 5px solid var(--border);
-  padding: clamp(8px, 2vh, 20px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(4px, 1.5vh, 12px);
-  min-height: 0;
-  min-width: 0;
+  border-radius: var(--radius); background: #fff; border: 5px solid var(--border);
+  padding: clamp(8px, 2vh, 20px); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: clamp(4px, 1.5vh, 12px);
+  min-height: 0; min-width: 0; overflow: hidden;
 }
 
+/* Key fix: give the image wrapper a minimum height so it doesn't collapse before images load */
 .likeImgWrap {
-  flex: 1;
-  min-height: 0;
-  min-width: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 1; min-height: 40px; min-width: 0; width: 100%;
+  display: flex; align-items: center; justify-content: center;
 }
 
-.likeVal {
-  font-family: var(--font-display);
-  font-size: clamp(16px, 3.5vh, 38px);
-  font-weight: 700;
-  flex-shrink: 0;
-}
+.likeVal { font-family: var(--font-display); font-size: clamp(16px, 3.5vh, 38px); font-weight: 700; flex-shrink: 0; text-transform: lowercase; }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  height: 64px;
-  flex-shrink: 0;
-}
-
+.nav { display: flex; justify-content: space-between; gap: 16px; height: 64px; flex-shrink: 0; }
 .navBtn {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 600;
-  padding: 0 36px;
-  height: 100%;
-  border-radius: 50px;
-  border: 2px solid var(--border);
-  background: var(--surface-panel);
-  color: var(--ink);
-  cursor: pointer;
-  transition: transform 0.15s;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  line-height: 1;
+  font-family: var(--font-display); font-size: 20px; font-weight: 600;
+  padding: 0 36px; height: 100%; border-radius: 50px; border: 2px solid var(--border);
+  background: var(--surface-panel); color: var(--ink); cursor: pointer;
+  transition: transform 0.15s; display: flex; align-items: center; gap: 10px; line-height: 1;
 }
 .navBtn:disabled { opacity: 0.35; cursor: default; }
 .navBtn:not(:disabled):hover { transform: scale(1.03); }
-
-.navNext {
-  background: var(--accent-warm);
-  color: #fff;
-  border-color: transparent;
-}
+.navNext { background: var(--accent-warm); color: #fff; border-color: transparent; }
 .navNext:hover { background: #D9764A !important; }

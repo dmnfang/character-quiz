@@ -7,9 +7,9 @@ import EndScreen from './screens/EndScreen.jsx';
 import './index.css';
 
 export default function App() {
-  const [screen, setScreen] = useState('title'); // title | slideshow | quiz | end
+  const [screen, setScreen] = useState('title');
   const [game, setGame] = useState(null);
-  const [results, setResults] = useState([]); // { charIndex, correct }[]
+  const [results, setResults] = useState([]);
 
   function startGame() {
     setGame(buildGame());
@@ -17,26 +17,16 @@ export default function App() {
     setScreen('slideshow');
   }
 
-  function startQuiz() {
-    setScreen('quiz');
-  }
-
-  function finishQuiz(r) {
-    setResults(r);
-    setScreen('end');
-  }
-
-  function restart() {
-    setGame(null);
-    setScreen('title');
-  }
+  function startQuiz() { setScreen('quiz'); }
+  function finishQuiz(r) { setResults(r); setScreen('end'); }
+  function restart() { setGame(null); setScreen('title'); }
 
   return (
     <>
-      {screen === 'title'      && <TitleScreen onStart={startGame} />}
-      {screen === 'slideshow'  && game && <SlideshowScreen game={game} onDone={startQuiz} />}
-      {screen === 'quiz'       && game && <QuizScreen game={game} onDone={finishQuiz} />}
-      {screen === 'end'        && game && <EndScreen game={game} results={results} onRestart={restart} />}
+      {screen === 'title'     && <TitleScreen onStart={startGame} />}
+      {screen === 'slideshow' && game && <SlideshowScreen game={game} onDone={startQuiz} />}
+      {screen === 'quiz'      && game && <QuizScreen game={game} onDone={finishQuiz} />}
+      {screen === 'end'       && game && <EndScreen game={game} results={results} onRestart={restart} />}
     </>
   );
 }

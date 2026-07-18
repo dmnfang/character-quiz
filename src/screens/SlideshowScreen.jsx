@@ -5,20 +5,14 @@ import LikeImage from '../components/LikeImage.jsx';
 import Arrow from '../components/Arrow.jsx';
 import styles from './SlideshowScreen.module.css';
 
-const VOWEL_START = ['a','e','i','o','u'];
-function article(name) {
-  return VOWEL_START.includes(name[0].toLowerCase()) ? 'an' : 'a';
-}
+const VOWELS = ['a','e','i','o','u'];
+function article(name) { return VOWELS.includes(name[0].toLowerCase()) ? 'an' : 'a'; }
 
 export default function SlideshowScreen({ game, onDone }) {
   const [idx, setIdx] = useState(0);
   const char = game.characters[idx];
   const total = game.characters.length;
-
-  function next() {
-    if (idx < total - 1) setIdx(idx + 1);
-    else onDone();
-  }
+  function next() { if (idx < total - 1) setIdx(idx + 1); else onDone(); }
   function prev() { if (idx > 0) setIdx(idx - 1); }
 
   return (
@@ -33,7 +27,6 @@ export default function SlideshowScreen({ game, onDone }) {
       </div>
 
       <div className={styles.slide} key={char.id}>
-        {/* Left */}
         <div className={styles.leftPanel}>
           <div className={styles.avatarWrap}>
             <CharacterAvatar char={char} />
@@ -44,7 +37,6 @@ export default function SlideshowScreen({ game, onDone }) {
           </p>
         </div>
 
-        {/* Right */}
         <div className={styles.rightPanel}>
           <p className={styles.ilike}>I like...</p>
           <div className={styles.likeGrid}>

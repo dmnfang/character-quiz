@@ -8,22 +8,6 @@
   height: var(--avatar-scale, 100%);
   container-type: size;
 }
-
-.emoji {
-  font-size: 50cqi;
-  line-height: 1;
-}
-
-.qmark {
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: #fff;
-  font-size: 50cqi;
-  line-height: 1;
-}
-
-.img {
-  width: 88%;
-  height: 88%;
-  object-fit: contain;
-}
+.emoji { font-size: 50cqi; line-height: 1; }
+.qmark { font-family: var(--font-display); font-weight: 700; color: #fff; font-size: 50cqi; line-height: 1; }
+.img { width: 88%; height: 88%; object-fit: contain; }
