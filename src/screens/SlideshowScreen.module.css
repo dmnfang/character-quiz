@@ -41,11 +41,12 @@
 
 /* Key fix: give the image wrapper a minimum height so it doesn't collapse before images load */
 .likeImgWrap {
-  flex: 1; min-height: 40px; min-width: 0; width: 100%;
+  flex: 1; min-height: 0; min-width: 0; width: 100%;
   display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 1;
 }
 
-.likeVal { font-family: var(--font-display); font-size: clamp(16px, 3.5vh, 38px); font-weight: 700; flex-shrink: 0; text-transform: lowercase; }
+.likeVal { font-family: var(--font-display); font-size: clamp(16px, 3.5vh, 38px); font-weight: 700; flex-shrink: 0; }
 
 .nav { display: flex; justify-content: space-between; gap: 16px; height: 64px; flex-shrink: 0; }
 .navBtn {
