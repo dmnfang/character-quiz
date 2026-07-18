@@ -10,7 +10,7 @@ import styles from './QuizScreen.module.css';
 const CATS = ['color', 'sport', 'food', 'subject'];
 
 export default function QuizScreen({ game, onDone }) {
-  const { characters, quizOrder } = game;
+  const { characters, quizOrder, count } = game;
   const [qIdx, setQIdx] = useState(0);
   const [flipped, setFlipped] = useState([]);
   const [phase, setPhase] = useState('flip');
@@ -51,7 +51,7 @@ export default function QuizScreen({ game, onDone }) {
   const nextQuestion = useCallback(() => {
     if (!nextReady) return;
     const next = qIdx + 1;
-    if (next >= 8) { onDone(results); return; }
+    if (next >= count) { onDone(results); return; }
     setQIdx(next);
     setFlipped([]);
     setPhase('flip');
@@ -64,10 +64,10 @@ export default function QuizScreen({ game, onDone }) {
   return (
     <div className={styles.screen}>
       <div className={styles.header}>
-        <span className={styles.qnum}>Q{qIdx + 1} / 8</span>
+        <span className={styles.qnum}>Q{qIdx + 1} / {count}</span>
         <div className={styles.scoreDots}>
           {results.map((r, i) => <div key={i} className={`${styles.scoreDot} ${r.correct ? styles.correct : styles.wrong}`} />)}
-          {Array(8 - results.length).fill(0).map((_, i) => <div key={i + results.length} className={styles.scoreDot} />)}
+          {Array(count - results.length).fill(0).map((_, i) => <div key={i + results.length} className={styles.scoreDot} />)}
         </div>
         <span className={styles.scoreLabel}>{results.filter(r=>r.correct).length} / {results.length}</span>
       </div>
@@ -152,7 +152,7 @@ export default function QuizScreen({ game, onDone }) {
       {phase === 'result' && (
         <div className={styles.footer}>
           <button className={`${styles.nextBtn} ${!nextReady ? styles.nextBtnWaiting : ''}`} onClick={nextQuestion} disabled={!nextReady}>
-            {qIdx < 7 ? <>Next Question <Arrow direction="right" size={24} /></> : <>See Results 🏆</>}
+            {qIdx < count - 1 ? <>Next Question <Arrow direction="right" size={24} /></> : <>See Results 🏆</>}
           </button>
         </div>
       )}

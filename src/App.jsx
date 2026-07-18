@@ -11,8 +11,8 @@ export default function App() {
   const [game, setGame] = useState(null);
   const [results, setResults] = useState([]);
 
-  function startGame() {
-    setGame(buildGame());
+  function startGame(count) {
+    setGame(buildGame(count));
     setResults([]);
     setScreen('slideshow');
   }

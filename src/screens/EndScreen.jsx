@@ -3,13 +3,26 @@ import { useEffect } from 'react';
 import AnimalIcon from '../components/AnimalIcon.jsx';
 import styles from './EndScreen.module.css';
 
+function gridCols(count) {
+  if (count <= 4) return 4;
+  if (count <= 6) return 3;
+  if (count <= 8) return 4;
+  return 4; // 12 → 4 cols × 3 rows
+}
+
 export default function EndScreen({ game, results, onRestart }) {
-  const { characters, quizOrder } = game;
+  const { characters, quizOrder, count } = game;
   const score = results.filter(r => r.correct).length;
   const total = results.length;
-  useEffect(() => { if (score >= 6) confetti({ particleCount: 200, spread: 100, origin: { y: 0.4 } }); }, []);
-  const medal = score === 8 ? '🥇' : score >= 6 ? '🥈' : score >= 4 ? '🥉' : '💪';
-  const msg = score === 8 ? 'Perfect score!' : score >= 6 ? 'Great job!' : score >= 4 ? 'Not bad!' : 'Keep practicing!';
+  const perfect = score === total;
+
+  useEffect(() => {
+    if (score >= total * 0.75) confetti({ particleCount: 200, spread: 100, origin: { y: 0.4 } });
+  }, []);
+
+  const medal = perfect ? '🥇' : score >= total * 0.75 ? '🥈' : score >= total * 0.5 ? '🥉' : '💪';
+  const msg = perfect ? 'Perfect score!' : score >= total * 0.75 ? 'Great job!' : score >= total * 0.5 ? 'Not bad!' : 'Keep practicing!';
+  const cols = gridCols(count);
 
   return (
     <div className={styles.screen}>
@@ -18,7 +31,7 @@ export default function EndScreen({ game, results, onRestart }) {
         <h1 className={styles.score}>{score} / {total}</h1>
         <p className={styles.msg}>{msg}</p>
       </div>
-      <div className={styles.grid}>
+      <div className={styles.grid} style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
         {quizOrder.map((charIdx, qi) => {
           const char = characters[charIdx];
           const correct = results[qi]?.correct;
