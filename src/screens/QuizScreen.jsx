@@ -121,7 +121,10 @@ export default function QuizScreen({ game, onDone }) {
           </div>
 
           <div className={`${styles.nameButtonsArea} ${phase !== 'flip' ? styles.nameButtonsVisible : ''}`}>
-            <div className={styles.nameButtons}>
+            <div
+              className={styles.nameButtons}
+              style={{ gridTemplateColumns: `repeat(${count <= 4 ? 2 : count <= 6 ? 3 : 4}, 1fr)` }}
+            >
               {characters.map(c => {
                 const isGreyed = greyedOut.has(c.id);
                 return (

@@ -20,13 +20,14 @@ export function assignLikes(characters) {
     const items = shuffle([...CATEGORIES[cat].items]);
     const charIndices = shuffle([...Array(n).keys()]);
 
-    // One forced shared pair
+    // One forced shared pair gets items[0]
     assignments[charIndices[0]][cat] = items[0];
     assignments[charIndices[1]][cat] = items[0];
 
-    // Rest get unique items
+    // Rest get unique items cycling through the remaining pool
+    const remaining = items.slice(1);
     charIndices.slice(2).forEach((ci, i) => {
-      assignments[ci][cat] = items[i + 1];
+      assignments[ci][cat] = remaining[i % remaining.length];
     });
   });
 

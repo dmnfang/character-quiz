@@ -59,7 +59,7 @@
 }
 .nameButtonsVisible { transform: translateY(0); opacity: 1; }
 
-.nameButtons { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; flex: 1; min-height: 0; }
+.nameButtons { display: grid; grid-template-rows: 1fr 1fr; gap: 10px; flex: 1; min-height: 0; }
 
 .nameBtn {
   font-family: var(--font-display); font-size: 15px; font-weight: 600;

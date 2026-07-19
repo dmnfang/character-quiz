@@ -4,10 +4,9 @@ import AnimalIcon from '../components/AnimalIcon.jsx';
 import styles from './EndScreen.module.css';
 
 function gridCols(count) {
-  if (count <= 4) return 4;
+  if (count <= 4) return 2;
   if (count <= 6) return 3;
-  if (count <= 8) return 4;
-  return 4; // 12 → 4 cols × 3 rows
+  return 4;
 }
 
 export default function EndScreen({ game, results, onRestart }) {

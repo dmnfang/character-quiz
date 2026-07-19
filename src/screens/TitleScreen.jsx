@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './TitleScreen.module.css';
 
-const COUNTS = [4, 6, 8, 12];
+const COUNTS = [4, 6, 8];
 
 export default function TitleScreen({ onStart }) {
   const [count, setCount] = useState(8);
